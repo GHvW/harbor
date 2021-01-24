@@ -14,14 +14,14 @@ static async Task Worker(ChannelReader<int> ports, ChannelWriter<int> results) {
         while (await ports.WaitToReadAsync()) {
             try {
                 ports.TryRead(out var i);
-                Console.WriteLine($"trying port {i}");
+                //Console.WriteLine($"trying port {i}");
                 await client.ConnectAsync(address, i);
 
                 results.TryWrite(i);
-                await Task.Delay(100);
+                //await Task.Delay(100);
             } catch (SocketException) {
                 results.TryWrite(0);
-                await Task.Delay(100);
+                //await Task.Delay(100);
             } catch (Exception ex) {
                 Console.WriteLine($"ex: {ex.ToString()}");
             }
