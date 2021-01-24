@@ -53,6 +53,7 @@ _ = Task.Run(() => {
     foreach (var i in Enumerable.Range(1, 1024)) {
         portsChan.Writer.TryWrite(i);
     }
+    portsChan.Writer.Complete();
 });
 
 
@@ -65,6 +66,8 @@ foreach (var i in Enumerable.Range(1, 1024)) {
     }
 }
 
+
+resultsChan.Writer.Complete();
 
 Console.WriteLine($"open ports: {string.Join(", ", openPorts)}");
 
